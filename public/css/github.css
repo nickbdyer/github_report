@@ -46,3 +46,7 @@ input {
 .profile img {
   width: 100%;
 }
+
+.close {
+  float:right;
+}
