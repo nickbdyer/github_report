@@ -34,14 +34,18 @@
     <script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js'></script>
     <script>
+
+    function addProfileFromUsername(username){
+      $.get("https://api.github.com/users/" + username + "?client_id=<%=ENV['CLIENT_ID']%>&client_secret=<%=ENV['CLIENT_SECRET']%>",function(user){
+        var newProfile = Mustache.render($('template').html(), user);
+        $(newProfile).prependTo('.profile-container').slideDown(3000);
+      });
+    };
+
     $(document).ready(function(){
       $( "#add_profile" ).submit(function( event ) {
         event.preventDefault();
-        var username = $('#username').val();
-        $.get('https://api.github.com/users/' + username,function(user){
-          var newProfile = Mustache.render($('template').html(), user);
-          $('.profile-container').append(newProfile);
-          })
+        addProfileFromUsername($('#username').val());
         });
       });
 
