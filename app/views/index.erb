@@ -54,10 +54,11 @@
         });
 
         $('.profile-container').on('click', '.close', function(){
-          console.log($(this).parent())
-          $(this).parent().remove();
+          $(this).closest('.profile').slideUp(function(){
+          $(this).remove();
         });
       });
+    });
 
     </script>
   </body>
